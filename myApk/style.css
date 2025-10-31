@@ -15,7 +15,7 @@ header {
 }
 
 .navbar {
-   background: rgb(62, 62, 169);;
+  background: linear-gradient(45deg, rgb(98, 147, 122), #4e4e8b);
   margin: auto;
   padding: 15px;
   display: flex;
@@ -304,7 +304,7 @@ background-image: url("images/background\ \(2\).png");
 }
 
 footer {
-  background: #0f3c91;
+  background: linear-gradient(45deg, rgb(98, 147, 122), #6262bc);
   color: white;
   padding: 40px 20px;
 }
@@ -376,7 +376,7 @@ body {
 
 /* Navbar */
 nav {
-  background-color: rgb(62, 62, 169); /* Wheat */
+background: linear-gradient(45deg, rgb(98, 147, 122), #6262bc);; /* Wheat */
 }
 
 nav ul {
@@ -404,7 +404,7 @@ nav ul li a.active {
 
 /* Page Header */
 .page-header {
-  background-color: #0055a5; /* Blue */
+ background: linear-gradient(45deg, rgb(98, 147, 122), #6262bc); /* Blue */
   color: white;
   text-align: center;
   padding: 40px 20px;
@@ -454,7 +454,7 @@ nav ul li a.active {
 .course-card .price {
   font-size: 1.2rem;
   font-weight: bold;
-  color: yellow;
+  color: green;
   margin-top: 10px;
 }
 
@@ -534,7 +534,7 @@ footer {
 }
 
 .course-card {
-  background-image: url(images/cardCourse.jpg);
+  background-image: url(images/white.jpeg);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.08);
@@ -578,4 +578,122 @@ footer {
   text-align: center;
   line-height: 1.6;
     font-style: bold;
+}
+.all-courses {
+  padding: 40px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.course-section {
+  background: #ffffffcc;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+  padding: 20px;
+}
+
+.course-section h2 {
+  color: #003d80;
+  margin-bottom: 10px;
+}
+
+.course-section img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.course-section ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+.course-section :hover{
+  transform: translateY(-5px);
+}
+.back-link {
+  display: inline-block;
+  margin: 20px;
+  color: #0073e6;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+/* ====== BUTTON STYLES ====== */
+.view-btn, 
+.enroll-btn, 
+.back-link {
+  display: inline-block;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #0073e6, #004c99);
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect */
+.view-btn:hover, 
+.enroll-btn:hover, 
+.back-link:hover {
+  background: linear-gradient(135deg, #005bb5, #003d80);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Click/Active effect */
+.view-btn:active, 
+.enroll-btn:active, 
+.back-link:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Smaller buttons (for course links inside cards) */
+.view-btn {
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+/* Larger buttons (for enroll pages) */
+.enroll-btn {
+  margin-top: 20px;
+  padding: 12px 28px;
+  font-size: 1.05rem;
+}
+
+/* Back link styling */
+.back-link {
+  background: transparent;
+  color: #004c99;
+  font-weight: 500;
+  text-decoration: underline;
+  box-shadow: none;
+}
+.back-link:hover {
+  color: #0073e6;
+  text-decoration: none;
+}
+.course-section {
+  background: #ffffffcc;
+  border-radius: 12px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 900px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background-color 0.8s ease;
+}
+
+.course-section.highlighted {
+  background-color: #d6eaff;
+  transition: background-color 0.8s ease;
 }
