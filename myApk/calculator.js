@@ -1,3 +1,10 @@
+/* <!-- Code attribution -->
+ <!--Title: IIE Modual Manual 2025-->
+ <!--author: The Independent Institut Of Education (Pty) Ltd-->
+ <!--Version: first Edition(2022)-->
+ <!--Available at:https://advtechonline.sharepoint.com/:w:/r/sites/TertiaryStudents/_layouts/15/Doc.aspx?sourcedoc=%7B022BFEDB-81D5-47FC-98E0-571385158886%7D&file=XHAW5112_MM.docx&action=default&mobileredirect=true-->
+ <!--Date accessed: 27/08/2025--> */
+ 
 document.getElementById("feeForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -30,52 +37,46 @@ document.getElementById("feeForm").addEventListener("submit", function(e) {
     <strong>Total: R${total.toFixed(2)}</strong>
   `;
 });
-document.getElementById('contactForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent the default form submission
+/* ========== CONTACT FORM VALIDATION & ERROR HANDLING ========== */
+const contactForm = document.querySelector('section.contact-form form');
 
-  // Reset error and success messages
-  document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-  document.getElementById('successMessage').textContent = '';
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  // Get form values
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
+    const nameField = contactForm.querySelector('input[name="name"]');
+    const emailField = contactForm.querySelector('input[name="email"]');
+    const messageField = contactForm.querySelector('textarea[name="message"]');
+    let hasError = false;
 
-  let isValid = true;
+    // Reset previous border styles
+    [nameField, emailField, messageField].forEach(field => {
+      field.style.border = '1px solid #ccc';
+    });
 
-  // Validate name
-  if (name === '') {
-    document.getElementById('nameError').textContent = 'Full Name is required.';
-    isValid = false;
-  }
+    // === Validation rules ===
+    if (!nameField.value.trim()) {
+      nameField.style.border = '2px solid red';
+      hasError = true;
+    }
+    if (!emailField.value.trim() || !emailField.value.includes('@')) {
+      emailField.style.border = '2px solid red';
+      hasError = true;
+    }
+    if (!messageField.value.trim()) {
+      messageField.style.border = '2px solid red';
+      hasError = true;
+    }
 
-  // Validate email
-  if (email === '') {
-    document.getElementById('emailError').textContent = 'Email is required.';
-    isValid = false;
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    document.getElementById('emailError').textContent = 'Please enter a valid email address.';
-    isValid = false;
-  }
+    // === Show error or success message ===
+    if (hasError) {
+      alert("⚠ Please fill in all required fields correctly before submitting.");
+      return;
+    }
 
-  // Validate message
-  if (message === '') {
-    document.getElementById('messageError').textContent = 'Message is required.';
-    isValid = false;
-  }
+    alert("✅ Thank you for contacting Empowering the Nation! We'll get back to you soon.");
 
-  // If the form is valid, display success message
-  if (isValid) {
-    const formData = {
-      name: name,
-      email: email,
-      message: message
-    };
-
-    console.log('Form submitted successfully:', formData);
-    document.getElementById('successMessage').textContent =
-      'Thank you for your message! We will get back to you soon.';
-    this.reset(); // Reset the form
-  }
-});
+    // === Reset form ===
+    contactForm.reset();
+  });
+}

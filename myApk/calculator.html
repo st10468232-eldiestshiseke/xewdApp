@@ -1,3 +1,9 @@
+ <!-- Code attribution -->
+ <!--Title: IIE Modual Manual 2025-->
+ <!--author: The Independent Institut Of Education (Pty) Ltd-->
+ <!--Version: first Edition(2022)-->
+ <!--Available at:https://advtechonline.sharepoint.com/:w:/r/sites/TertiaryStudents/_layouts/15/Doc.aspx?sourcedoc=%7B022BFEDB-81D5-47FC-98E0-571385158886%7D&file=XHAW5112_MM.docx&action=default&mobileredirect=true-->
+ <!--Date accessed: 27/08/2025-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,7 +192,8 @@
         <p><strong>Total Payable: <span id="totalPayable">R0</span></strong></p>
       </div>
 
-      <button onclick="proceedToPayment()" class="calculate-btn">Proceed to Payment</button>
+      <button id="payButton" type="button">Proceed to Payment</button>
+
     </div>
   </section>
 
@@ -195,15 +202,20 @@
     <p>&copy; 2025 Empowering the Nation</p>
   </footer>
 
-  <!-- JavaScript -->
+   <!-- JavaScript -->
   <script>
     let cart = [];
     let subTotal = 0;
 
     function addToCart(courseName, price) {
-      cart.push({ name: courseName, price: price });
-      subTotal += price;
-      renderCart();
+      const exists = cart.some(item => item.name === courseName);
+      if (!exists) {
+        cart.push({ name: courseName, price: price });
+        subTotal += price;
+        renderCart();
+      } else {
+        alert(`${courseName} is already in your cart!`);
+      }
     }
 
     function removeFromCart(index) {
@@ -220,34 +232,43 @@
       } else {
         cart.forEach((item, index) => {
           const li = document.createElement('li');
-          li.innerHTML = `${item.name} – R${item.price} 
+          li.innerHTML = `${item.name} – R${item.price}
             <button style="background:#dc3545" onclick="removeFromCart(${index})">Remove</button>`;
           cartList.appendChild(li);
         });
       }
-
-      // --- Discount Rule ---
+      // Calculate discount and VAT
       let discount = subTotal > 3000 ? subTotal * 0.10 : 0;
-
-      // --- VAT on discounted total ---
       let vat = (subTotal - discount) * 0.15;
-
       let totalPayable = subTotal - discount + vat;
-
       // Update UI
-      document.getElementById('subTotal').innerText = 'R' + subTotal.toLocaleString();
-      document.getElementById('discount').innerText = 'R' + discount.toLocaleString();
-      document.getElementById('vat').innerText = 'R' + vat.toLocaleString();
-      document.getElementById('totalPayable').innerText = 'R' + totalPayable.toLocaleString();
+      if (document.getElementById('subTotal')) document.getElementById('subTotal').innerText = 'R' + subTotal.toLocaleString();
+      if (document.getElementById('discount')) document.getElementById('discount').innerText = 'R' + discount.toLocaleString();
+      if (document.getElementById('vat')) document.getElementById('vat').innerText = 'R' + vat.toLocaleString();
+      if (document.getElementById('totalPayable')) document.getElementById('totalPayable').innerText = 'R' + totalPayable.toLocaleString();
     }
 
-    function proceedToPayment() {
-      if (cart.length === 0) {
-        alert("Please add at least one course to your cart.");
-      } else {
-        alert("Redirecting to payment gateway... (placeholder)");
+    // Payment button logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const payButton = document.getElementById('payButton');
+      if (payButton) {
+        payButton.addEventListener('click', () => {
+          if (cart.length === 0) {
+            alert("🛒 Your cart is empty! Please add at least one course before proceeding.");
+            return;
+          }
+          const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+          const confirmPayment = confirm(`💳 You are about to pay R${subtotal.toFixed(2)}. Proceed with payment?`);
+          if (confirmPayment) {
+            alert("✅ Payment successful! Thank you for enrolling with Empowering the Nation.");
+            cart = [];
+            subTotal = 0;
+            renderCart();
+          }
+        });
       }
-    }
+    });
+
   </script>
 
 </body>
